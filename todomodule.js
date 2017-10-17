@@ -84,13 +84,13 @@ var ModuleToDo = (function() {
 					var today = new Date();
 					var tomorrow = new Date(today.getTime() + (24 * 60 * 60 * 1000)); // время завтрашнего дня в мс
 					var dayTomorrow = tomorrow.getDate(); // извлекаем из мс день
-				var monthTomorrow = tomorrow.getMonth() + 1; // извлекаем из мс месяц; в js месяц отсчитывается с нуля
-				var yearTomorrow = tomorrow.getFullYear();  // извлекаем из мс год
-				var date = dayTomorrow + "." + monthTomorrow + "." + yearTomorrow;
-				if (date === todoList[key].date) { //сравниваем каждую дату из списка с датой завтрашнего дня
-					out += "<li class=\"task-body__item\"><span class=\"delete-sign\" data-id=\"" + key + "\">x</span><input class=\"task-body__checkbox\" data-id=\"" + key + "\" type=\"checkbox\"" + checkBox + "><p><small>" + todoList[key].date + "</small></p><p>" + toDoTask + "</p></li>";
-				}
-			} else if (filter === 4) {
+					var monthTomorrow = tomorrow.getMonth() + 1; // извлекаем из мс месяц; в js месяц отсчитывается с нуля
+					var yearTomorrow = tomorrow.getFullYear();  // извлекаем из мс год
+					var date = dayTomorrow + "." + monthTomorrow + "." + yearTomorrow;
+					if (date === todoList[key].date) { //сравниваем каждую дату из списка с датой завтрашнего дня
+						out += "<li class=\"task-body__item\"><span class=\"delete-sign\" data-id=\"" + key + "\">x</span><input class=\"task-body__checkbox\" data-id=\"" + key + "\" type=\"checkbox\"" + checkBox + "><p><small>" + todoList[key].date + "</small></p><p>" + toDoTask + "</p></li>";
+					}
+				} else if (filter === 4) {
 					//На неделю
 					var today = new Date();
 					var nextWeekDate = new Date(today.getTime() + (7 * 24 * 60 * 60 * 1000)); // дата дня, которыый наступит через неделю
@@ -123,28 +123,31 @@ var ModuleToDo = (function() {
 			var	listItem = document.querySelectorAll(".task-body__item");
 			for (var i = 0; i < listItem.length; i++) {
 				listItem[i].addEventListener("mouseover", function() {
-					var elem = this.firstChild;
+					var elem = this.firstChild;					
 					elem.style.display = "inline";
-					// Зададим обработчик mouseup на знак "Удалить"
-					elem.addEventListener("mouseup", function(){
-						var temp = [];
-						var j = 0;
-						for (var k = 0; k < todoList.length; k++) {
-							if (k !== parseInt(elem.dataset.id)) {
-								temp[j] = todoList[k];
-								j++;
-							};
-						};
-						todoList = temp;
-						out();
-						localStorage.setItem("toDo", JSON.stringify(todoList));
-					});
 				});
 				listItem[i].addEventListener("mouseleave", function() {
 					var elem = this.firstChild;
 					elem.style.display = "none";
 				});
 			};
+			for (var i = 0; i < listItem.length; i++) {
+				listItem[i].firstChild.addEventListener("click", function(){
+					var elem = this;	
+					var temp = [];
+					var j = 0;
+					for (var k = 0; k < todoList.length; k++) {
+						//console.log(todoList);
+						if (k !== parseInt(elem.dataset.id)) {
+							temp[j] = todoList[k];
+							j++;
+						};
+					};
+					todoList = temp;
+					out();
+					localStorage.setItem("toDo", JSON.stringify(todoList));
+				});
+			}
 		}
 
 		function escapeHtml(text) { // заменяет все html-теги в строке на кодовые значения
