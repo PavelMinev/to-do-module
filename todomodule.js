@@ -1,7 +1,7 @@
 var ModuleToDo = (function() {
 	var ModuleToDo = {};
 	ModuleToDo.init = function(element) {
-		var app_block = '<div class="task-body"><h1>ToDo list</h1><div class="task-body__input"><h2>Новая</h2><ul class="task-body__input-items"><li>Задача:</li><li><input id="task" type="text" placeholder="Надо сделать..."></li><li>Срок:</li><li><input id="date" type="text" placeholder="01.01.2018"></li><li><button id="add-task">Добавить</button></li><li><button id="delete-tasks">Удалить</button></li></ul></div><div class="task-body__list"><h2>Список задач</h2><div class="task-body__container"><ul class="task-body__items"></ul></div><div class="task-body__filter"><h2><small>Фильтр:</small></h2><ul class="task-body__filter-data"><li class="task-body__filter-items task-body__filter-items--active" data-id="1">Все</li><li class="task-body__filter-items" data-id="2">Сделанные</li><li class="task-body__filter-items" data-id="3">На завтра</li><li class="task-body__filter-items" data-id="4">На неделю</li><li class="task-body__filter-items" data-id="5">Не сделанные</li></ul></div></div><div style="clear: both;"></div><style>.task-body h1 {font-size: 1.5em; text-align: center; text-shadow: -1px -1px 20px azure; margin: 0;}.task-body {background: linear-gradient(90deg, #000000,#c1c0c0); padding: 15px; border-radius: 10px; color: white; width: 600px;}.task-body__input-items {list-style: none; padding: 0;}.task-body__input-items>li {margin-bottom: 5px;}.task-body__input-items>li>input {padding: 2px; border-radius: 5px;}.task-body__input-items>li>button {background: white; border-radius: 5px; width: 177px;}.task-body__input {width: 200px; height: 150px; display: inline-block; float: left;}.task-body__input h2 {font-size: 1.2em; margin: 0 0 10px 0; text-align: center;}#add-task:hover {cursor: pointer; background: #01FF00!important; color: white;}#delete-tasks:hover {cursor: pointer; background: red!important; color: white;}.task-body__input input {outline: none;}.task-body__input input:hover {border: 2px  solid #01FF00; outline: none;}.task-body__input input:focus {border: 2px  solid #01FF00; outline: none;}.task-body__list {width: 400px; min-height: 150px; max-height: 250px; display: inline-block; float: left;}.task-body__list h2 {font-size: 1.2em; margin: 0 0 10px 0; text-align: center;}.task-body ul {margin: 0;}.task-body__container {max-height: 215px; overflow-y: scroll; float: left;}.task-body__items {list-style: none; padding: 0px; float: left; width: 230px; padding-left: 10px; min-height: 0.1px;}.task-body__items p {margin: 0;}.delete-sign {position: absolute; top: 0; left: -5px; display: none; color: red; margin-bottom: 2px; cursor: pointer; padding: 0 4px;}.delete-sign:hover {background: red; color: white;}.task-body__checkbox {position: absolute; top: 0; left: 10px;}.task-body__checkbox:hover {cursor: pointer; outline: 1px solid #01FF00;}.task-body__items>li {padding-left: 30px; position: relative; margin-bottom: 5px;}.task-body__filter {width: 140px; height: 150px; display: inline-block; float: left;}.task-body__filter li{ margin-bottom: 5px; transition: margin 0.3s ease;}.task-body__filter-data {list-style: none; position: relative;}.task-body__filter-data>li:hover {cursor: pointer; color: #01FF00; margin-left: -5px;}.task-body__filter-items--active {color: #01FF00; margin-left: -5px;}</style></div>';
+		var app_block = '<div class="task-body"><h1>ToDo list</h1><div class="task-body__input"><h2>Новая</h2><ul class="task-body__input-items"><li>Задача:</li><li><input id="task" type="text" placeholder="Надо сделать..."></li><li>Срок:</li><li><input id="date" type="text" placeholder="01.01.2018"></li><li><button id="add-task">Добавить</button></li><li><button id="delete-tasks">Удалить</button></li></ul></div><div class="task-body__list"><h2>Список задач</h2><div class="task-body__container"><ul class="task-body__items"></ul></div><div class="task-body__filter"><h2><small>Фильтр:</small></h2><ul class="task-body__filter-data"><li class="task-body__filter-items task-body__filter-items--active" data-id="1">Все</li><li class="task-body__filter-items" data-id="2">Сделанные</li><li class="task-body__filter-items" data-id="3">На завтра</li><li class="task-body__filter-items" data-id="4">На неделю</li><li class="task-body__filter-items" data-id="5">Не сделанные</li></ul></div></div><div style="clear: both;"></div></div>';
 		// Для добавления в блок с атрибутом class="element" или id="element"
 		if (element.indexOf("#") === 0) { // если id задан через #: ModuleToDo.init("#element")
 			document.getElementById(element.substring(1,element.length)).innerHTML = app_block;
@@ -75,10 +75,10 @@ var ModuleToDo = (function() {
 				if (todoList[key].check === true) {checkBox = " checked"; toDoTask = "<strike>" + toDoTask + "</strike>"};
 				if (filter === 1) {
 					// Все
-					out += "<li class=\"task-body__item\"><span class=\"delete-sign\" data-id=\"" + key + "\">x</span><input class=\"task-body__checkbox\" data-id=\"" + key + "\" type=\"checkbox\"" + checkBox + "><p><small>" + todoList[key].date + "</small></p><p>" + toDoTask + "</p></li>";
+					out += "<li class=\"task-body__item\"><span class=\"delete-sign\" data-id=\"" + key + "\">x</span><input class=\"task-body__checkbox\" data-id=\"" + key + "\" type=\"checkbox\"" + checkBox + " id=\"item_" + key + "\"><label for=\"item_" + key + "\"><p><small>" + todoList[key].date + "</small></p><p>" + toDoTask + "</p></label></li>";
 				} else if (filter === 2 && todoList[key].check === true) {
 					// Сделанные
-					out += "<li class=\"task-body__item\"><span class=\"delete-sign\" data-id=\"" + key + "\">x</span><input class=\"task-body__checkbox\" data-id=\"" + key + "\" type=\"checkbox\"" + checkBox + "><p><small>" + todoList[key].date + "</small></p><p>" + toDoTask + "</p></li>";
+					out += "<li class=\"task-body__item\"><span class=\"delete-sign\" data-id=\"" + key + "\">x</span><input class=\"task-body__checkbox\" data-id=\"" + key + "\" type=\"checkbox\"" + checkBox + " id=\"item_" + key + "\"><label for=\"item_" + key + "\"><p><small>" + todoList[key].date + "</small></p><p>" + toDoTask + "</p></label></li>";
 				} else if (filter === 3) {
 					// На завтра
 					var today = new Date();
@@ -88,7 +88,7 @@ var ModuleToDo = (function() {
 					var yearTomorrow = tomorrow.getFullYear();  // извлекаем из мс год
 					var date = dayTomorrow + "." + monthTomorrow + "." + yearTomorrow;
 					if (date === todoList[key].date) { //сравниваем каждую дату из списка с датой завтрашнего дня
-						out += "<li class=\"task-body__item\"><span class=\"delete-sign\" data-id=\"" + key + "\">x</span><input class=\"task-body__checkbox\" data-id=\"" + key + "\" type=\"checkbox\"" + checkBox + "><p><small>" + todoList[key].date + "</small></p><p>" + toDoTask + "</p></li>";
+						out += "<li class=\"task-body__item\"><span class=\"delete-sign\" data-id=\"" + key + "\">x</span><input class=\"task-body__checkbox\" data-id=\"" + key + "\" type=\"checkbox\"" + checkBox + " id=\"item_" + key + "\"><label for=\"item_" + key + "\"><p><small>" + todoList[key].date + "</small></p><p>" + toDoTask + "</p></label></li>";
 					}
 				} else if (filter === 4) {
 					//На неделю
@@ -98,47 +98,40 @@ var ModuleToDo = (function() {
 					var date = todoList[key].date;
 					var dateFormatted = date.split(".");
 					dateFormatted = new Date(dateFormatted[2] + "-" + dateFormatted[1] + "-" + dateFormatted[0]);
-					if (dateFormatted.getTime() <= nextWeekDate) { // аналогично, но здесь оставляем в мс и сравниваем даты
-						out += "<li class=\"task-body__item\"><span class=\"delete-sign\" data-id=\"" + key + "\">x</span><input class=\"task-body__checkbox\" data-id=\"" + key + "\" type=\"checkbox\"" + checkBox + "><p><small>" + todoList[key].date + "</small></p><p>" + toDoTask + "</p></li>";
+					if (dateFormatted.getTime() <= nextWeekDate && dateFormatted.getTime() >= today.getTime()) { // аналогично, но здесь оставляем в мс и сравниваем даты
+						out += "<li class=\"task-body__item\"><span class=\"delete-sign\" data-id=\"" + key + "\">x</span><input class=\"task-body__checkbox\" data-id=\"" + key + "\" type=\"checkbox\"" + checkBox + " id=\"item_" + key + "\"><label for=\"item_" + key + "\"><p><small>" + todoList[key].date + "</small></p><p>" + toDoTask + "</p></label></li>";
 					}
 				} else if (filter === 5 && todoList[key].check === false) { // все не сделанные дела
-					out += "<li class=\"task-body__item\"><span class=\"delete-sign\" data-id=\"" + key + "\">x</span><input class=\"task-body__checkbox\" data-id=\"" + key + "\" type=\"checkbox\"" + checkBox + "><p><small>" + todoList[key].date + "</small></p><p>" + toDoTask + "</p></li>";
+					out += "<li class=\"task-body__item\"><span class=\"delete-sign\" data-id=\"" + key + "\">x</span><input class=\"task-body__checkbox\" data-id=\"" + key + "\" type=\"checkbox\"" + checkBox + " id=\"item_" + key + "\"><label for=\"item_" + key + "\"><p><small>" + todoList[key].date + "</small></p><p>" + toDoTask + "</p></label></li>";
 				}
 			};
 			document.getElementsByClassName("task-body__items")[0].innerHTML = out;
-			listModify();
 		}
 
-		function listModify() {
-			// Зададим обработчик click на все чекбоксы отображаемых элементов списка дел
-			var li = document.querySelectorAll(".task-body__checkbox");
-			for (var i = 0; i < li.length; i++) {
-				li[i].addEventListener('click', function() {
-					(todoList[this.dataset.id].check) ? todoList[this.dataset.id].check = false : todoList[this.dataset.id].check = true;
+		
+		// Зададим обработчик click на все чекбоксы отображаемых элементов списка дел
+		var ul = document.querySelector(".task-body__items");
+		ul.onmouseup = function(e){
+			var id = e.target.closest("li").getElementsByTagName("input")[0].dataset.id;
+			console.log(e.target.closest("li").getElementsByTagName("input")[0].dataset.id);
+			if (e.target.closest("label") === e.target.closest("li").getElementsByTagName("label")[0] || e.target === e.target.closest("li").getElementsByTagName("input")[0]) {
+				if (id !== undefined) {
+					(todoList[id].check) ? todoList[id].check = false : todoList[id].check = true;
 					localStorage.setItem("toDo", JSON.stringify(todoList));
 					out();
-				});
-			};
-			// Зададим обработчик mouseover и mouseleave на все отображаемые элементы списка дел
-			var	listItem = document.querySelectorAll(".task-body__item");
-			for (var i = 0; i < listItem.length; i++) {
-				listItem[i].addEventListener("mouseover", function() {
-					var elem = this.firstChild;					
-					elem.style.display = "inline";
-				});
-				listItem[i].addEventListener("mouseleave", function() {
-					var elem = this.firstChild;
-					elem.style.display = "none";
-				});
-			};
-			for (var i = 0; i < listItem.length; i++) {
-				listItem[i].firstChild.addEventListener("click", function(){
-					var elem = this;	
+				};
+			};				
+		};
+		// Зададим обработчик mouseover и mouseleave на все отображаемые элементы списка дел
+		ul.onmouseover = function(e) {
+			var li = e.target.closest("li");
+			if (li) {
+				li.firstElementChild.classList.add("delete-sign--visible");
+				li.firstElementChild.onclick = function() {
 					var temp = [];
 					var j = 0;
 					for (var k = 0; k < todoList.length; k++) {
-						//console.log(todoList);
-						if (k !== parseInt(elem.dataset.id)) {
+						if (k !== parseInt(this.dataset.id)) {
 							temp[j] = todoList[k];
 							j++;
 						};
@@ -146,9 +139,12 @@ var ModuleToDo = (function() {
 					todoList = temp;
 					out();
 					localStorage.setItem("toDo", JSON.stringify(todoList));
-				});
+				};
+				li.onmouseleave = function() {
+					li.firstElementChild.classList.remove("delete-sign--visible");
+				};
 			}
-		}
+		};
 
 		function escapeHtml(text) { // заменяет все html-теги в строке на кодовые значения
 			var map = {

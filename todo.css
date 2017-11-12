@@ -1,0 +1,107 @@
+.task-body h1 {
+	font-size: 1.5em; text-align: center; text-shadow: -1px -1px 20px azure; margin: 0;}
+.task-body {
+	background: linear-gradient(90deg, #000000,#c1c0c0); 
+	padding: 15px; border-radius: 10px; color: white; width: 600px;}
+.task-body__input-items {
+	list-style: none; padding: 0;}
+.task-body__input-items>li {
+	margin-bottom: 5px;}
+.task-body__input-items>li>input {
+	padding: 2px; border-radius: 5px;}
+.task-body__input-items>li>button {
+	background: white; 
+	border-radius: 5px; 
+	width: 177px;}
+.task-body__input {
+	width: 200px; 
+	height: 150px; 
+	display: inline-block; 
+	float: left;}
+.task-body__input h2 {
+	font-size: 1.2em; 
+	margin: 0 0 10px 0; 
+	text-align: center;}
+#add-task:hover {
+	cursor: pointer; 
+	background: #01FF00!important; 
+	color: white;}
+#delete-tasks:hover {
+	cursor: pointer; 
+	background: red!important; 
+	color: white;}
+.task-body__input input {
+	outline: none;}
+.task-body__input input:hover {
+	border: 2px  solid #01FF00; 
+	outline: none;}
+.task-body__input input:focus {
+	border: 2px  solid #01FF00; 
+	outline: none;}
+.task-body__list {
+	width: 400px; 
+	min-height: 150px; 
+	max-height: 250px; 
+	display: inline-block; 
+	float: left;}
+.task-body__list h2 {
+	font-size: 1.2em; 
+	margin: 0 0 10px 0; 
+	text-align: center;}
+.task-body ul {
+	margin: 0;}
+.task-body__container {
+	max-height: 215px; 
+	overflow-y: scroll; 
+	float: left;}
+.task-body__items {
+	list-style: none; 
+	padding: 0px; 
+	float: left; 
+	width: 230px; 
+	padding-left: 10px; 
+	min-height: 0.1px;}
+.task-body__items p {
+	margin: 0;}
+.delete-sign {
+	position: absolute; 
+	top: 0; 
+	left: -5px; 
+	display: none; 
+	color: red; 
+	margin-bottom: 2px; 
+	cursor: pointer; 
+	padding: 0 4px;}
+.delete-sign:hover {
+	background: red; 
+	color: white;}
+.delete-sign--visible {
+	display: inline;}
+.task-body__checkbox {
+	position: absolute; 
+	top: 0; left: 10px;}
+.task-body__checkbox:hover {
+	cursor: pointer; 
+	outline: 1px solid #01FF00;}
+.task-body__items>li {
+	padding-left: 30px; 
+	position: relative; 
+	margin-bottom: 5px;}
+.task-body__filter {
+	width: 140px; 
+	height: 150px; 
+	display: inline-block; 
+	float: left;}
+.task-body__filter li{ 
+	margin-bottom: 5px; 
+	transition: margin 0.3s ease;}
+.task-body__filter-data {
+	list-style: none;
+	position: relative;}
+.task-body__filter-data>li:hover {
+	cursor: pointer; 
+	color: #01FF00; 
+	margin-left: -5px;}
+.task-body__filter-items--active {
+	color: #01FF00; 
+	margin-left: -5px;}
